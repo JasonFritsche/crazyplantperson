@@ -19,6 +19,17 @@ export default {
     },
   },
   actions: {
+    initialAuthCheck({ commit }) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          commit("setUser", user);
+          commit("setUserAuth", true);
+        } else {
+          commit("setUser", null);
+          commit("setUserAuth", false);
+        }
+      });
+    },
     signUpAction({ commit }, payload) {
       firebase
         .auth()
