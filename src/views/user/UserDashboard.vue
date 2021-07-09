@@ -111,6 +111,7 @@ export default {
       this.notesLoaded = true;
     },
     watchlist: function () {
+      console.log(this.watchlist);
       if (this.watchlist[0] === null) {
         // no watchlist items
         this.watchlistEmpty = true;
@@ -138,8 +139,7 @@ export default {
   },
   mounted: function () {
     this.$store.dispatch("getDashboardNotes");
-    if (this.watchlist && this.watchlist.length > 0) return;
-    this.$store.dispatch("getWatchlistPlants"); // already fetched.
+    this.$store.dispatch("getWatchlistPlants");
   },
 };
 </script>
