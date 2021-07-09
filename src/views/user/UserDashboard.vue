@@ -111,7 +111,6 @@ export default {
       this.notesLoaded = true;
     },
     watchlist: function () {
-      console.log(this.watchlist);
       if (this.watchlist[0] === null) {
         // no watchlist items
         this.watchlistEmpty = true;
