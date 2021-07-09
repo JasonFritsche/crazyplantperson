@@ -50,6 +50,18 @@ export default {
         commit("setError", err.message);
       }
     },
+    googleSignInAction({ commit }) {
+      let provider = new firebase.auth.GoogleAuthProvider();
+      return firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          commit("setUser", result.user);
+        })
+        .catch((error) => {
+          commit("setError", error.message);
+        });
+    },
   },
   getters: {
     getUser: (state) => state.user,

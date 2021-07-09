@@ -27,6 +27,16 @@
           >Sign In</v-btn
         >
       </v-hover>
+      <v-hover>
+        <v-btn
+          block
+          elevation="4"
+          class="mt-2"
+          @click="googleSignin"
+          color="accent"
+          >Google</v-btn
+        >
+      </v-hover>
     </v-form>
     <hr class="mt-5" />
     <v-card-actions class="mt-2 justify-end">
@@ -64,7 +74,7 @@ export default {
     ...mapGetters(["getUser", "getError"]),
   },
   methods: {
-    ...mapActions(["signInAction"]),
+    ...mapActions(["signInAction", "googleSignInAction"]),
     async validate() {
       const isFormValid = this.$refs.form.validate();
       if (isFormValid) {
@@ -77,6 +87,13 @@ export default {
     },
     redirectToRegister() {
       this.$router.push({ path: "/register" });
+    },
+    async googleSignin() {
+      await this.googleSignInAction();
+      if (!this.getError) {
+        this.$store.commit("setUserAuth", true);
+        this.$router.push({ path: "/home/dashboard" });
+      }
     },
   },
 };
