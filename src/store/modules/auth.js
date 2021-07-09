@@ -56,8 +56,6 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then((result) => {
-          let token = result.credential.accessToken;
-          console.log(token); // Token
           commit("setUser", result.user);
         })
         .catch((error) => {
