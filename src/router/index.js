@@ -19,7 +19,7 @@ const routes = [
   {
     path: "/home",
     component: Home,
-    beforeEnter: (to, from, next) => {
+    beforeResolve: (to, from, next) => {
       if (!store.state.auth.isUserAuthenticated) {
         next("/signin");
       } else {
