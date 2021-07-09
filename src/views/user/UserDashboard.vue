@@ -138,8 +138,7 @@ export default {
   },
   mounted: function () {
     this.$store.dispatch("getDashboardNotes");
-    if (this.watchlist && this.watchlist.length > 0) return;
-    this.$store.dispatch("getWatchlistPlants"); // already fetched.
+    this.$store.dispatch("getWatchlistPlants");
   },
 };
 </script>
