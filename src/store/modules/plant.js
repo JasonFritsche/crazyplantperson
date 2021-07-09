@@ -34,6 +34,9 @@ export default {
     updateDashboardNotes(state, data) {
       state.dashboardNotes = data;
     },
+    getAllWatchlist(state, data) {
+      state.watchlist = data;
+    },
     addPlantToWatchlist(state, data) {
       state.watchlist.push(data);
     },
@@ -224,11 +227,13 @@ export default {
           if (querySnapshot.empty) {
             commit("addPlantToWatchlist", null);
           } else {
+            const watchlist = [];
             querySnapshot.forEach((doc) => {
               const watchListPlant = doc.data();
               watchListPlant.id = doc.id;
-              commit("addPlantToWatchlist", watchListPlant);
+              watchlist.push(watchListPlant);
             });
+            commit("getAllWatchlist", watchlist);
           }
         })
         .catch((error) => {
