@@ -88,6 +88,7 @@
 import { mapGetters, mapActions } from "vuex";
 import PageHeader from "@/components/PageHeader.vue";
 import SectionHeader from "@/components/SectionHeader.vue";
+import { v4 as uuidv4 } from "uuid";
 export default {
   name: "UserDashboard",
   components: { PageHeader, SectionHeader },
@@ -106,12 +107,17 @@ export default {
   },
   watch: {
     dashboardNotes: function () {
-      this.notesText = this.dashboardNotes.notes;
-      this.notesId = this.dashboardNotes.id;
-      this.notesLoaded = true;
+      if (this.dashboardNotes) {
+        this.notesText = this.dashboardNotes.notes;
+        this.notesId = this.dashboardNotes.id;
+        this.notesLoaded = true;
+      } else {
+        this.notesLoaded = true;
+        this.notesText = "my notes";
+      }
     },
     watchlist: function () {
-      if (this.watchlist[0] === null) {
+      if (this.watchlist === null) {
         // no watchlist items
         this.watchlistEmpty = true;
         this.watchlistLoaded = true;
@@ -124,6 +130,9 @@ export default {
   methods: {
     ...mapActions(["updateDashboardNotes"]),
     submitNotes() {
+      if (this.notesId === null) {
+        this.notesId = uuidv4();
+      }
       this.updateDashboardNotes({ notes: this.notesText, id: this.notesId });
     },
     clearNotes() {
