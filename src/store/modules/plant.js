@@ -5,7 +5,7 @@ export default {
     plantLogEntries: [],
     plantDetails: [],
     allPlantDetails: [],
-    dashboardNotes: "my notes",
+    dashboardNotes: null,
     watchlist: [],
   },
 
@@ -31,14 +31,17 @@ export default {
     addAllPlantDetails(state, data) {
       state.allPlantDetails.push(data);
     },
-    updateDashboardNotes(state, data) {
+    getAllDashboardNotes(state, data) {
       state.dashboardNotes = data;
     },
     getAllWatchlist(state, data) {
-      state.watchlist = data;
+      state.watchlist = data === null ? null : data;
     },
     addPlantToWatchlist(state, data) {
       state.watchlist.push(data);
+    },
+    watchListLoaded(state, data) {
+      state.watchListLoaded = data;
     },
     removePlantFromWatchlist(state, data) {
       const filteredPlants = state.watchlist.filter(
@@ -181,16 +184,37 @@ export default {
     },
 
     async updateDashboardNotes({ commit }, payload) {
-      await firebase
+      var docRef = await firebase
         .firestore()
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .collection("dashboardNotes")
-        .doc(payload.id)
-        .update({
-          notes: payload.notes,
+        .doc(payload.id);
+
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            doc.update({
+              notes: payload.notes,
+            });
+            commit("updateDashboardNotes", payload);
+          } else {
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(firebase.auth().currentUser.uid)
+              .collection("dashboardNotes")
+              .add({
+                notes: payload.notes,
+                id: payload.id,
+              });
+            commit("updateDashboardNotes", payload);
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
         });
-      commit("updateDashboardNotes", payload);
     },
 
     async getDashboardNotes({ commit }) {
@@ -202,11 +226,15 @@ export default {
       dashboardRef
         .get()
         .then((querySnapShot) => {
-          querySnapShot.forEach((doc) => {
-            const details = doc.data();
-            details.id = doc.id;
-            commit("updateDashboardNotes", details);
-          });
+          if (querySnapShot.empty) {
+            commit("getAllDashboardNotes", null);
+          } else {
+            querySnapShot.forEach((doc) => {
+              const notes = doc.data();
+              notes.id = doc.id;
+              commit("getAllDashboardNotes", notes);
+            });
+          }
         })
         .catch((error) => {
           console.warn("Error getting document:", error);
@@ -219,13 +247,12 @@ export default {
         .collection("users")
         .doc(firebase.auth().currentUser.uid)
         .collection("plants");
-
       const query = watchlistRef.where("watch", "==", true);
       query
         .get()
         .then((querySnapshot) => {
           if (querySnapshot.empty) {
-            commit("addPlantToWatchlist", null);
+            commit("getAllWatchlist", null);
           } else {
             const watchlist = [];
             querySnapshot.forEach((doc) => {
