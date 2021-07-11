@@ -25,8 +25,5 @@ export default {
   data: () => ({
     //
   }),
-  created: async function () {
-    await this.$store.dispatch("initialAuthCheck");
-  },
 };
 </script>

@@ -4,41 +4,27 @@ export default {
   state: {
     user: null,
     error: null,
-    isUserAuthenticated: false,
   },
-
   mutations: {
-    setUser(state, payload) {
+    LOGIN: (state, user) => (state.user = user),
+    LOGOUT: (state) => (state.user = null),
+    SETUSER(state, payload) {
       state.user = payload;
     },
-    setError(state, payload) {
+    SETERROR(state, payload) {
       state.error = payload;
-    },
-    setUserAuth(state, payload) {
-      state.isUserAuthenticated = payload;
     },
   },
   actions: {
-    initialAuthCheck({ commit }) {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          commit("setUser", user);
-          commit("setUserAuth", true);
-        } else {
-          commit("setUser", null);
-          commit("setUserAuth", false);
-        }
-      });
-    },
     signUpAction({ commit }, payload) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then((response) => {
-          commit("setUser", response.user);
+          commit("SETUSER", response.user);
         })
         .catch((error) => {
-          commit("setError", error.message);
+          commit("SETERROR", error.message);
         });
     },
     signInAction({ commit }, payload) {
@@ -46,19 +32,18 @@ export default {
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then((response) => {
-          commit("setUser", response.user);
+          commit("SETUSER", response.user);
         })
         .catch((error) => {
-          commit("setError", error.message);
+          commit("SETERROR", error.message);
         });
     },
     async signOutAction({ commit }) {
       try {
         await firebase.auth().signOut();
-        commit("setUser", null);
-        commit("setUserAuth", false);
+        commit("SETUSER", null);
       } catch (err) {
-        commit("setError", err.message);
+        commit("SETERROR", err.message);
       }
     },
     googleSignInAction({ commit }) {
@@ -67,16 +52,17 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then((result) => {
-          commit("setUser", result.user);
+          commit("SETUSER", result.user);
         })
         .catch((error) => {
-          commit("setError", error.message);
+          commit("SETERROR", error.message);
         });
     },
   },
   getters: {
     getUser: (state) => state.user,
-    isUserAuth: (state) => state.isUserAuthenticated,
+    isAuthenticated: (state) =>
+      typeof state.user === "object" && state.user !== null,
     getError: (state) => state.error,
   },
 };

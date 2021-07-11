@@ -7,7 +7,7 @@
     v-model="drawerState"
     @mouseleave.native="toggleSidenav"
   >
-    <v-list v-if="!isUserAuth">
+    <v-list v-if="!isAuthenticated">
       <v-list-item @click="redirectToLogin()" :disabled="isSignInRouteActive">
         <v-list-item-content>
           <v-list-item-title> Sign In </v-list-item-title>
@@ -20,7 +20,7 @@
       </v-list-item>
     </v-list>
 
-    <v-list v-if="isUserAuth">
+    <v-list v-if="isAuthenticated">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title>
@@ -72,7 +72,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "TheSideNav",
   computed: {
-    ...mapGetters(["getUser", "isUserAuth"]),
+    ...mapGetters(["getUser", "isAuthenticated"]),
     drawerState: {
       get() {
         return this.$store.getters.drawerState;

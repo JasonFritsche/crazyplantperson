@@ -33,7 +33,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["isUserAuth", "drawerState"]),
+    ...mapGetters(["isAuthenticated", "drawerState"]),
   },
 };
 </script>
