@@ -5,6 +5,7 @@ export default {
     plantLogEntries: [],
     plantDetails: [],
     allPlantDetails: [],
+    selectedPlantInfo: null,
     dashboardNotes: null,
     watchlist: [],
   },
@@ -30,6 +31,9 @@ export default {
     },
     addAllPlantDetails(state, data) {
       state.allPlantDetails.push(data);
+    },
+    updatedSelectectedPlantInfo(state, data) {
+      state.selectedPlantInfo = data;
     },
     getAllDashboardNotes(state, data) {
       state.dashboardNotes = data;
@@ -145,13 +149,20 @@ export default {
       if (payload === null) {
         commit("addAllPlantDetails", null);
       } else {
-        const allPlantDetails = await firebase
+        const plantDetails = await firebase
           .firestore()
           .collection("users")
           .doc(firebase.auth().currentUser.uid)
           .collection("plants")
-          .doc(payload.id)
-          .collection("plant-details");
+          .doc(payload.id);
+
+        plantDetails.get().then((res) => {
+          if (res) {
+            commit("updatedSelectectedPlantInfo", res.data());
+          }
+        });
+
+        const allPlantDetails = plantDetails.collection("plant-details");
 
         allPlantDetails.get().then((querySnapShot) => {
           if (querySnapShot.empty) {
@@ -289,6 +300,7 @@ export default {
     plantLogEntries: (state) => state.plantLogEntries,
     plantDetails: (state) => state.plantDetails,
     allPlantDetails: (state) => state.allPlantDetails,
+    selectedPlantInfo: (state) => state.selectedPlantInfo,
     dashboardNotes: (state) => state.dashboardNotes,
     watchlist: (state) => state.watchlist,
   },

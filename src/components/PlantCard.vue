@@ -210,7 +210,7 @@ export default {
     goToDetails() {
       this.$router.push({
         name: "plantdetailscalendar",
-        params: { id: this.plant.id, plantData: this.plant },
+        params: { id: this.plant.id },
       });
     },
     addToWatchlist() {
