@@ -2,7 +2,14 @@
   <v-container>
     <v-row>
       <v-col class="d-flex justify-center">
-        <PageHeader>{{ plantData.plantName }} Details</PageHeader>
+        <PageHeader
+          >{{
+            selectedPlantInfo === null
+              ? "loading..."
+              : selectedPlantInfo.plantName
+          }}
+          Details</PageHeader
+        >
       </v-col>
     </v-row>
     <v-row>
@@ -68,7 +75,6 @@ import { getDateTextFormat, dateStringToDate } from "@/utils/DateUtil.js";
 import PageHeader from "@/components/PageHeader.vue";
 export default {
   name: "PlantDetailsDatePicker",
-  props: ["plantData"],
   components: {
     PageHeader,
   },
@@ -87,14 +93,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["plantDetails", "allPlantDetails"]),
+    ...mapGetters(["plantDetails", "allPlantDetails", "selectedPlantInfo"]),
   },
   mounted() {
     this.$store.dispatch("getAllPlantDetails", {
-      id: this.plantData.id,
+      id: this.$route.params.id,
     });
     this.$store.dispatch("getPlantDetailsByDate", {
-      id: this.plantData.id,
+      id: this.$route.params.id,
       dateText: getDateTextFormat(this.selectedDate),
     });
     this.detailsForm;
@@ -137,7 +143,7 @@ export default {
         miscNotes: "",
       };
       this.$store.dispatch("getPlantDetailsByDate", {
-        id: this.plantData.id,
+        id: this.$route.params.id,
         dateText:
           this.selectedDate !== null
             ? getDateTextFormat(this.selectedDate)
@@ -148,7 +154,7 @@ export default {
       this.addPlantDetailsEntry({
         ...this.detailsForm,
         dateText: getDateTextFormat(this.selectedDate),
-        id: this.plantData.id,
+        id: this.$route.params.id,
       });
     },
   },
