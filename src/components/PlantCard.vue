@@ -5,11 +5,15 @@
       class="ma-2 mt-md-16"
       :class="{ flipIn: isEditMode, flipOut: !isEditMode }"
       color="primaryTwo"
-      elevation="7"
+      elevation="10"
     >
       <!-- start display card -->
       <template v-if="!isEditMode">
-        <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
+        <div
+          class="d-flex flex-column align-center justify-center ma-n10 pt-n4"
+        >
+          <v-img width="200" src="@/assets/plant-cartoon-img-sm.png"></v-img>
+        </div>
         <v-card-actions class="center card-actions">
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
@@ -90,7 +94,11 @@
       <!-- end display card -->
       <!-- start editable card -->
       <template v-if="isEditMode">
-        <v-img height="250" src="@/assets/plant-cartoon-img.png"></v-img>
+        <div
+          class="d-flex flex-column align-center justify-center ma-n10 pt-n4"
+        >
+          <v-img width="200" src="@/assets/plant-cartoon-img-sm.png"></v-img>
+        </div>
         <v-card-actions class="center card-actions">
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
