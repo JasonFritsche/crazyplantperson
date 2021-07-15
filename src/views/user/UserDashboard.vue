@@ -25,6 +25,7 @@
           </p>
         </div>
         <v-list
+          class="watchlist"
           v-if="watchlistLoaded && !watchlistEmpty"
           dense
           color="primaryTwo"
@@ -32,7 +33,11 @@
           rounded
         >
           <v-list-item-group>
-            <v-list-item v-for="(item, i) in watchlist" :key="i">
+            <v-list-item
+              class="watchlist-item"
+              v-for="(item, i) in watchlist"
+              :key="i"
+            >
               <v-list-item-content @click="routeToPlant(item)">
                 <v-list-item-title v-text="item.plantName"></v-list-item-title>
               </v-list-item-content>
@@ -56,8 +61,8 @@
                   v-model="notesText"
                   :loading="!notesLoaded"
                   :disabled="!notesLoaded"
-                  color="primaryTwo"
-                  elevation="7"
+                  background-color="primaryTwo"
+                  elevation="2"
                 ></v-textarea>
               </v-card-text>
             </v-card>
@@ -152,4 +157,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.watchlist {
+  height: 13.7em;
+  overflow-y: auto;
+}
+</style>
