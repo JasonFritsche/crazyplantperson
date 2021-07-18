@@ -31,4 +31,27 @@ describe("Actions.vue", () => {
     wrapper.vm.submitNotes();
     expect(actions.updateDashboardNotes).toHaveBeenCalled();
   });
+
+  it("submits notes on submit button click", async () => {
+    const wrapper = shallowMount(UserDashboard, { store, localVue });
+    wrapper.vm.notesText = "hello world";
+    const submitNotesBtn = wrapper.find(".submit-notes-btn");
+    await submitNotesBtn.trigger("click");
+    expect(wrapper.vm.notesText).toContain("hello world");
+  });
+
+  // it("Clears notes on clear button click", async () => {
+  //   const wrapper = shallowMount(UserDashboard, { store, localVue });
+  //   wrapper.setData({
+  //     notesText: "updated",
+  //   });
+  //   const clearNotesBtn = wrapper.find(".clear-notes-btn");
+  //   await clearNotesBtn.trigger("click");
+  //   expect(wrapper.vm.notesText).toEqual("");
+  // });
+
+  it("renders the PageHeader markup", () => {
+    const wrapper = shallowMount(UserDashboard, { store, localVue });
+    expect(wrapper.html()).toContain("Your Dashboard");
+  });
 });
