@@ -7,6 +7,9 @@ import vuetify from "./plugins/vuetify";
 import VCalendar from "./plugins/VCalendar";
 import "@/plugins/firebase";
 
+import wb from "./registerServiceWorker";
+Vue.prototype.$workbox = wb;
+
 Vue.config.productionTip = false;
 
 new Vue({
