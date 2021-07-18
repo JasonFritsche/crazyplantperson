@@ -72,12 +72,20 @@
           <v-col>
             <v-row>
               <v-col
-                ><v-btn block color="secondaryOne" @click="submitNotes"
+                ><v-btn
+                  class="submit-notes-btn"
+                  block
+                  color="secondaryOne"
+                  @click="submitNotes"
                   >Submit</v-btn
                 ></v-col
               >
               <v-col
-                ><v-btn block color="secondaryTwo" @click="clearNotes"
+                ><v-btn
+                  class="clear-notes-btn"
+                  block
+                  color="secondaryTwo"
+                  @click="clearNotes"
                   >clear</v-btn
                 ></v-col
               >
