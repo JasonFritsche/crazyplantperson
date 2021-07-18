@@ -25,5 +25,10 @@ module.exports = {
       maskIcon: null,
       msTileImage: "img/icons/msapplication-icon-144x144.png",
     },
+    workboxOptions: {
+      // swSrc is required in InjectManifest mode.
+      swSrc: "src/registerServiceWorker.js",
+      // ...other Workbox options...
+    },
   },
 };
