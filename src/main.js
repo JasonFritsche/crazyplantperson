@@ -6,8 +6,10 @@ import store from "./store/store";
 import vuetify from "./plugins/vuetify";
 import VCalendar from "./plugins/VCalendar";
 import "@/plugins/firebase";
+
 import wb from "./registerServiceWorker";
 Vue.prototype.$workbox = wb;
+
 Vue.config.productionTip = false;
 
 new Vue({
@@ -15,5 +17,6 @@ new Vue({
   store,
   vuetify,
   VCalendar,
+  VueAnimateOnScroll,
   render: (h) => h(App),
 }).$mount("#app");
