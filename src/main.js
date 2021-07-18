@@ -5,7 +5,6 @@ import router from "./router";
 import store from "./store/store";
 import vuetify from "./plugins/vuetify";
 import VCalendar from "./plugins/VCalendar";
-import VueAnimateOnScroll from "./plugins/AnimateOnScroll";
 import "@/plugins/firebase";
 
 Vue.config.productionTip = false;
@@ -15,6 +14,5 @@ new Vue({
   store,
   vuetify,
   VCalendar,
-  VueAnimateOnScroll,
   render: (h) => h(App),
 }).$mount("#app");
