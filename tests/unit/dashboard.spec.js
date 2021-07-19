@@ -34,12 +34,13 @@ describe("Actions.vue", () => {
 
   it("submits notes on submit button click", async () => {
     const wrapper = shallowMount(UserDashboard, { store, localVue });
-    wrapper.vm.notesText = "hello world";
+    wrapper.vm.notesText = "hello world!";
     const submitNotesBtn = wrapper.find(".submit-notes-btn");
     await submitNotesBtn.trigger("click");
-    expect(wrapper.vm.notesText).toContain("hello world");
+    expect(wrapper.vm.notesText).toContain("hello world!");
   });
 
+  // TODO: Figure this one out
   // it("Clears notes on clear button click", async () => {
   //   const wrapper = shallowMount(UserDashboard, { store, localVue });
   //   wrapper.setData({
