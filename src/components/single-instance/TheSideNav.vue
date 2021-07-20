@@ -44,7 +44,7 @@
         >
           <v-list-item-content>
             <v-list-item-title class="nav-item-title">
-              <v-icon>mdi-calendar-today</v-icon>Watch List
+              <v-icon>mdi-view-list</v-icon>Watch List
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -58,7 +58,7 @@
         >
           <v-list-item-content>
             <v-list-item-title class="nav-item-title">
-              <v-icon>mdi-calendar-today</v-icon>My Notes
+              <v-icon>mdi-notebook-edit</v-icon>My Notes
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
