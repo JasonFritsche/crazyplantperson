@@ -1,6 +1,10 @@
 <template>
   <v-container>
     <v-row>
+      <v-col cols="12" md="6" class="py-12">
+        <!-- selected plant details -->
+        <PlantCard :plant="plantLogEntries[selectedPlantIndex]"></PlantCard>
+      </v-col>
       <v-col cols="12" md="6" class="py-5">
         <SectionHeader>
           <template v-slot:title>My Plants</template>
@@ -32,10 +36,6 @@
             </v-list-item>
           </v-list-item-group>
         </v-list>
-      </v-col>
-      <v-col cols="12" md="6" class="py-12">
-        <!-- selected plant details -->
-        <PlantCard :plant="plantLogEntries[selectedPlantIndex]"></PlantCard>
       </v-col>
     </v-row>
   </v-container>
