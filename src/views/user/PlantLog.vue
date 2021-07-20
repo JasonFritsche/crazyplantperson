@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
-          <PageHeader>Your Plant Log</PageHeader>
+          <PageHeader>Plant Log</PageHeader>
         </v-col>
       </v-row>
       <v-row justify="end">

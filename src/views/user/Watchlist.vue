@@ -2,17 +2,11 @@
   <v-container>
     <v-row>
       <v-col class="d-flex justify-center">
-        <PageHeader>Your Dashboard</PageHeader>
+        <PageHeader>Watch List</PageHeader>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
-        <SectionHeader>
-          <template v-slot:title>My Watchlist</template>
-          <template v-slot:tooltip
-            >Plants that you want to keep a close eye on</template
-          >
-        </SectionHeader>
         <div v-if="!watchlistLoaded" class="d-flex justify-center">
           <v-progress-circular
             indeterminate
@@ -52,11 +46,9 @@
 <script>
 import { mapGetters } from "vuex";
 import PageHeader from "@/components/PageHeader.vue";
-import SectionHeader from "@/components/SectionHeader.vue";
-import { v4 as uuidv4 } from "uuid";
 export default {
   name: "Watchlist",
-  components: { PageHeader, SectionHeader },
+  components: { PageHeader },
   data() {
     return {
       watchlistEmpty: true,
@@ -94,7 +86,7 @@ export default {
 
 <style>
 .watchlist {
-  height: 13.7em;
+  height: 95%;
   overflow-y: auto;
 }
 </style>

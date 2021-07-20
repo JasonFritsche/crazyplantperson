@@ -5,8 +5,8 @@ import Home from "@/views/user/UserHome.vue";
 import Welcome from "../views/Welcome.vue";
 import PlantLog from "@/views/user/PlantLog.vue";
 import PlantDetailsDatePicker from "@/views/user/PlantDetailsDatePicker.vue";
-import Watchlist from "@views/user/Watchlist.vue";
-import MyNotes from "@views/user/MyNotes.vue";
+import Watchlist from "../views/user/Watchlist.vue";
+import MyNotes from "../views/user/MyNotes.vue";
 import { onAuthStateInit } from "../plugins/firebase";
 
 Vue.use(VueRouter);
@@ -44,6 +44,11 @@ const routes = [
       {
         path: "notes",
         component: MyNotes,
+        meta: { public: false },
+      },
+      {
+        path: "plantlog",
+        component: Home,
         meta: { public: false },
         children: [
           {

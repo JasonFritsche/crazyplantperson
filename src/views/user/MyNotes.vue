@@ -7,12 +7,6 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <!-- <SectionHeader>
-          <template v-slot:title>My Notes</template>
-          <template v-slot:tooltip
-            >Write helpful notes to your future self</template
-          >
-        </SectionHeader> -->
         <v-row>
           <v-col>
             <v-card color="primaryTwo" elevation="7">
@@ -38,7 +32,7 @@
                   block
                   color="secondaryOne"
                   @click="submitNotes"
-                  >Submit</v-btn
+                  >Save</v-btn
                 ></v-col
               >
               <v-col
@@ -47,7 +41,7 @@
                   block
                   color="secondaryTwo"
                   @click="clearNotes"
-                  >clear</v-btn
+                  >Clear</v-btn
                 ></v-col
               >
             </v-row>
@@ -61,11 +55,10 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import PageHeader from "@/components/PageHeader.vue";
-import SectionHeader from "@/components/SectionHeader.vue";
 import { v4 as uuidv4 } from "uuid";
 export default {
   name: "MyNotes",
-  components: { PageHeader, SectionHeader },
+  components: { PageHeader },
   data() {
     return {
       notesText: "",
