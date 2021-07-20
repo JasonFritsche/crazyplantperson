@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col cols="12">
         <SectionHeader>
           <template v-slot:title>My Watchlist</template>
           <template v-slot:tooltip
@@ -45,90 +45,28 @@
           </v-list-item-group>
         </v-list>
       </v-col>
-      <v-col cols="12" md="6">
-        <SectionHeader>
-          <template v-slot:title>My Notes</template>
-          <template v-slot:tooltip
-            >Write helpful notes to your future self</template
-          >
-        </SectionHeader>
-        <v-row>
-          <v-col>
-            <v-card color="primaryTwo" elevation="7">
-              <v-card-text>
-                <v-textarea
-                  name="my-notes"
-                  v-model="notesText"
-                  :loading="!notesLoaded"
-                  :disabled="!notesLoaded"
-                  background-color="primaryTwo"
-                  elevation="2"
-                ></v-textarea>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-row>
-              <v-col
-                ><v-btn
-                  class="submit-notes-btn"
-                  block
-                  color="secondaryOne"
-                  @click="submitNotes"
-                  >Submit</v-btn
-                ></v-col
-              >
-              <v-col
-                ><v-btn
-                  class="clear-notes-btn"
-                  block
-                  color="secondaryTwo"
-                  @click="clearNotes"
-                  >clear</v-btn
-                ></v-col
-              >
-            </v-row>
-          </v-col>
-        </v-row>
-      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import PageHeader from "@/components/PageHeader.vue";
 import SectionHeader from "@/components/SectionHeader.vue";
 import { v4 as uuidv4 } from "uuid";
 export default {
-  name: "UserDashboard",
+  name: "Watchlist",
   components: { PageHeader, SectionHeader },
   data() {
     return {
-      notesText: "",
-      notesLoaded: false,
-      notesId: null,
-      selectedItem: 1,
       watchlistEmpty: true,
       watchlistLoaded: false,
     };
   },
   computed: {
-    ...mapGetters(["dashboardNotes", "watchlist"]),
+    ...mapGetters(["watchlist"]),
   },
   watch: {
-    dashboardNotes: function () {
-      if (this.dashboardNotes) {
-        this.notesText = this.dashboardNotes.notes;
-        this.notesId = this.dashboardNotes.id;
-        this.notesLoaded = true;
-      } else {
-        this.notesLoaded = true;
-        this.notesText = "my notes";
-      }
-    },
     watchlist: function () {
       if (this.watchlist === null) {
         // no watchlist items
@@ -141,16 +79,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["updateDashboardNotes"]),
-    submitNotes() {
-      if (this.notesId === null) {
-        this.notesId = uuidv4();
-      }
-      this.updateDashboardNotes({ notes: this.notesText, id: this.notesId });
-    },
-    clearNotes() {
-      this.notesText = "";
-    },
     routeToPlant(plant) {
       this.$router.push({
         name: "plantdetailscalendar",
@@ -159,7 +87,6 @@ export default {
     },
   },
   mounted: function () {
-    this.$store.dispatch("getDashboardNotes");
     this.$store.dispatch("getWatchlistPlants");
   },
 };
