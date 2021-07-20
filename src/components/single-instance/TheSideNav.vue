@@ -36,7 +36,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <router-link to="/home/dashboard" v-slot="{ isExactActive, navigate }">
+      <router-link to="/home/watchlist" v-slot="{ isExactActive, navigate }">
         <v-list-item
           class="nav-item"
           :class="{ activeNavItem: isExactActive }"
@@ -44,7 +44,21 @@
         >
           <v-list-item-content>
             <v-list-item-title class="nav-item-title">
-              <v-icon>mdi-calendar-today</v-icon> User Dashboard
+              <v-icon>mdi-calendar-today</v-icon>Watch List
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </router-link>
+
+      <router-link to="/home/notes" v-slot="{ isExactActive, navigate }">
+        <v-list-item
+          class="nav-item"
+          :class="{ activeNavItem: isExactActive }"
+          @click="navigate"
+        >
+          <v-list-item-content>
+            <v-list-item-title class="nav-item-title">
+              <v-icon>mdi-calendar-today</v-icon>My Notes
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

@@ -44,7 +44,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <div v-animate-onscroll="'animated fadeInLeft'">
+          <div>
             <v-img
               src="@/assets/plant-lady-2.png"
               max-height="600"
@@ -53,7 +53,7 @@
           </div>
         </v-col>
         <v-col order="2" class="d-flex justify-center align-center">
-          <div v-animate-onscroll="'animated fadeInRight'">
+          <div>
             <h2 class="text-h4 d-flex justify-start fontOne--text">Calendar</h2>
             <p class="body-1 mt-2">
               Easily track your all of your plants with our calendar based
@@ -70,7 +70,7 @@
           order-sm="1"
           class="d-flex justify-center align-center"
         >
-          <div v-animate-onscroll="'animated fadeInLeft'">
+          <div>
             <h2 class="text-h4 d-flex justify-start fontOne--text">
               Dashboard
             </h2>
@@ -86,7 +86,7 @@
           </div>
         </v-col>
         <v-col order="1" order-sm="2">
-          <div v-animate-onscroll="'animated fadeInRight'">
+          <div>
             <v-img
               src="@/assets/plant-lady-1.png"
               max-height="600"
@@ -98,7 +98,7 @@
       <div class="mt-16"></div>
       <v-row>
         <v-col order-sm="2" order-md="1" xs="12" lg="6">
-          <div v-animate-onscroll="'animated fadeInLeft'">
+          <div>
             <v-img
               src="@/assets/sleeping-cactus.png"
               max-height="480"
@@ -113,7 +113,7 @@
           order-md="2"
           class="d-flex justify-center align-center pt-6"
         >
-          <div v-animate-onscroll="'animated fadeInRight'">
+          <div>
             <p class="mt-2">
               <strong class="text-h3 red--text text--lighten-1">"</strong>
               <span class="quote-text">

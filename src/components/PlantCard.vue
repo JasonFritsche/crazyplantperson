@@ -14,7 +14,7 @@
         >
           <v-img width="200" src="@/assets/plant-cartoon-img-sm.png"></v-img>
         </div>
-        <v-card-actions class="center card-actions">
+        <v-card-actions class="space card-actions">
           <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -240,6 +240,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.space {
+  justify-content: space-evenly;
+}
 .center {
   justify-content: center;
 }
