@@ -87,7 +87,7 @@ export default {
         await this.signInAction({ email: this.email, password: this.password });
         if (!this.getError) {
           this.$store.commit("setUserAuth", true);
-          this.$router.push({ path: "/home/dashboard" });
+          this.$router.push({ path: "/home/watchlist" });
         }
       }
     },
@@ -98,7 +98,7 @@ export default {
       await this.googleSignInAction();
       if (!this.getError) {
         this.$store.commit("setUserAuth", true);
-        this.$router.push({ path: "/home/dashboard" });
+        this.$router.push({ path: "/home/watchlist" });
       }
     },
   },
