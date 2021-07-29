@@ -13,7 +13,10 @@
           <v-list-item-title> Sign In </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item @click="redirectToRegister()">
+      <v-list-item
+        @click="redirectToRegister()"
+        :disabled="isRegisterRouteActive"
+      >
         <v-list-item-content>
           <v-list-item-title>Create Account</v-list-item-title>
         </v-list-item-content>
@@ -97,6 +100,9 @@ export default {
     },
     isSignInRouteActive: function () {
       return this.$route.name === "signin";
+    },
+    isRegisterRouteActive: function () {
+      return this.$route.name === "register";
     },
   },
   methods: {
