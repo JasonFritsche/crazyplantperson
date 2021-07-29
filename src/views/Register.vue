@@ -38,7 +38,7 @@
 </template>
 <script>
 import CardWrapper from "../components/CardWrapper";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Register",
   components: { CardWrapper },
@@ -83,6 +83,14 @@ export default {
       ],
       firebaseError: "",
     };
+  },
+  computed: {
+    ...mapGetters(["getUser"]),
+  },
+  watch: {
+    getUser: function () {
+      console.log(this.getUser);
+    },
   },
   methods: {
     ...mapActions(["signUpAction"]),
