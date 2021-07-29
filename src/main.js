@@ -7,6 +7,16 @@ import VCalendar from "./plugins/VCalendar";
 import "@/plugins/firebase";
 import "./registerServiceWorker";
 
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
+const options = {
+  // You can set your default options here
+};
+
+Vue.use(Toast, options);
+
 Vue.config.productionTip = false;
 
 new Vue({

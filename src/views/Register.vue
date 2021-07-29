@@ -38,7 +38,7 @@
 </template>
 <script>
 import CardWrapper from "../components/CardWrapper";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Register",
   components: { CardWrapper },
@@ -83,6 +83,26 @@ export default {
       ],
       firebaseError: "",
     };
+  },
+  computed: {
+    ...mapGetters(["getUser", "getError"]),
+  },
+  watch: {
+    getUser: function () {
+      // user registration successful
+      this.$toast.success("Account Created Successfully", {
+        timeout: 2000,
+      });
+      setTimeout(() => {
+        this.$router.push({ path: "home" });
+      }, 2100);
+    },
+    getError: function () {
+      // error during registration
+      this.$toast.error("An error occurred...try again later", {
+        timeout: 5000,
+      });
+    },
   },
   methods: {
     ...mapActions(["signUpAction"]),
