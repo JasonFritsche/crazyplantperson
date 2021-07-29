@@ -22,6 +22,7 @@ const routes = [
   },
   {
     path: "/home",
+    name: "home",
     component: Home,
     beforeResolve: (to, from, next) => {
       if (!store.state.auth.isAuthenticated) {

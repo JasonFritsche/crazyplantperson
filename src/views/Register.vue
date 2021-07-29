@@ -85,11 +85,23 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getUser"]),
+    ...mapGetters(["getUser", "getError"]),
   },
   watch: {
     getUser: function () {
-      console.log(this.getUser);
+      // user registration successful
+      this.$toast.success("Account Created Successfully", {
+        timeout: 2000,
+      });
+      setTimeout(() => {
+        this.$router.push({ path: "home" });
+      }, 2100);
+    },
+    getError: function () {
+      // error during registration
+      this.$toast.error("An error occurred...try again later", {
+        timeout: 5000,
+      });
     },
   },
   methods: {
