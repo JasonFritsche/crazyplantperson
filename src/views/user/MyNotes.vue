@@ -74,6 +74,7 @@ export default {
   },
   watch: {
     dashboardNotes: function () {
+      console.log(this.dashboardNotes);
       if (this.dashboardNotes) {
         this.notesText = this.dashboardNotes.notes;
         this.notesId = this.dashboardNotes.id;

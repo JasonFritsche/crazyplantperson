@@ -237,8 +237,9 @@ export default {
       dashboardRef
         .get()
         .then((querySnapShot) => {
+          console.log(querySnapShot);
           if (querySnapShot.empty) {
-            commit("getAllDashboardNotes", null);
+            commit("getAllDashboardNotes", "");
           } else {
             querySnapShot.forEach((doc) => {
               const notes = doc.data();
